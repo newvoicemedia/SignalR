@@ -141,7 +141,7 @@
             };
             registration.eventHandlers.push(handler);
 
-            $(that).bind(makeEventName(eventName), handler);
+            $(that).on(makeEventName(eventName), handler);
 
             return that;
         },
@@ -180,7 +180,7 @@
                     if (callbackRegistration) {
                         // Unbind all event handlers associated with the registration.
                         for (var j = 0; j < callbackRegistration.eventHandlers.length; j++) {
-                            $(that).unbind(makeEventName(eventName), callbackRegistration.eventHandlers[j]);
+                            $(that).off(makeEventName(eventName), callbackRegistration.eventHandlers[j]);
                         }
 
                         // Remove the registration from the list
@@ -192,7 +192,7 @@
                         }
                     }
                 } else if (!callback) { // Check if we're removing the whole event and we didn't error because of an invalid callback
-                    $(that).unbind(makeEventName(eventName));
+                    $(that).off(makeEventName(eventName));
 
                     delete callbackMap[eventName];
                 }
